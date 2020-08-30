@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, abort, jsonify
 from flask_restful import Resource, Api, reqparse
 import os
 
@@ -60,6 +60,12 @@ class Places(Resource):
 
 
 api.add_resource(Places, '/places')
+
+
+@app.errorhandler(404)
+def resource_not_found(e):
+    return jsonify(error=str(e)), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
