@@ -8,7 +8,8 @@ api = Api(app)
 DATA = {
     'places':
         ['toronto',
-         'montreal']
+         'montreal',
+         'chambly']
 }
 
 class Places(Resource):
