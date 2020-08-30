@@ -1,4 +1,4 @@
-from flask import Flask, abort, jsonify
+from flask import Flask, abort, jsonify, render_template
 from flask_restful import Resource, Api, reqparse
 import os
 
@@ -58,6 +58,12 @@ api.add_resource(Places, '/places')
 @app.errorhandler(404)
 def resource_not_found(e):
     return jsonify(error=str(e)), 404
+
+
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello.html', name=name)
 
 
 if __name__ == '__main__':
