@@ -7,7 +7,8 @@ api = Api(app)
 
 DATA = {
     'places':
-        ['rome',
+        ['montreal',
+         'rome',
          'london',
          'new york city',
          'los angeles',
