@@ -17,7 +17,7 @@ DATA = {
 class Places(Resource):
     def get(self):
         # return our data and 200 OK HTTP code
-        return render_template('places.html', data=DATA), 200, {'Content-Type': 'text/html; charset=utf-8'}
+        return {'data': DATA}, 200
 
     def post(self):
         # parse request arguments
@@ -34,7 +34,7 @@ class Places(Resource):
         else:
             # otherwise, add the new location to places
             DATA['places'].append(args['location'])
-            return render_template('places.html', data=DATA), 200, {'Content-Type': 'text/html; charset=utf-8'}
+            return {'data': DATA}, 200
 
     def delete(self):
         # parse request arguments
@@ -46,7 +46,7 @@ class Places(Resource):
         if args['location'] in DATA['places']:
             # if we do, remove and return data with 200 OK
             DATA['places'].remove(args['location'])
-            return render_template('places.html', data=DATA), 200, {'Content-Type': 'text/html; charset=utf-8'}
+            return {'data': DATA}, 200
         else:
             # if location does not exist in places list return 404 not found
             return {
@@ -66,6 +66,11 @@ def resource_not_found(e):
 @app.route('/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
+
+
+@app.route('/list')
+def list(data=None):
+    return render_template('places.html', data=DATA)
 
 
 if __name__ == '__main__':
