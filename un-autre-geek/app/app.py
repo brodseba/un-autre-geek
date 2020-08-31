@@ -62,8 +62,8 @@ def resource_not_found(e):
     return jsonify(error=str(e)), 404
 
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
+@app.route('/')
+@app.route('/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
 
