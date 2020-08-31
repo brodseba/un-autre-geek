@@ -9,7 +9,9 @@ DATA = {
     'places':
         ['toronto',
          'montreal',
-         'chambly']
+         'chambly',
+         'granby',
+         'Sherbrooke']
 }
 
 class Places(Resource):
