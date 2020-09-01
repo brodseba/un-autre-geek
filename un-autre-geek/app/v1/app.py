@@ -1,6 +1,7 @@
 from flask import Flask, abort, jsonify, render_template, Blueprint
 from flask_restful import Resource, Api, reqparse
 import os
+from google.cloud import firestore
 
 app = Flask(__name__)
 
