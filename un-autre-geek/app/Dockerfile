@@ -1,4 +1,5 @@
 FROM python:3.8-alpine
+RUN apk update && apk add --no-cache gcc
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
