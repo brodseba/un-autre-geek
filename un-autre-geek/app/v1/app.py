@@ -59,17 +59,17 @@ class Places(Resource):
 api.add_resource(Places, '/places')
 
 
-@api.errorhandler(404)
+@app.errorhandler(404)
 def resource_not_found(e):
     return jsonify(error=str(e)), 404
 
 
-@api.route('/')
-@api.route('/<name>')
+@app.route('/')
+@app.route('/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
 
 
-@api.route('/list')
+@app.route('/list')
 def list(data=None):
     return render_template('places.html', data=DATA)
