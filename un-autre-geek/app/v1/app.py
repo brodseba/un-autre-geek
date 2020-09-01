@@ -64,12 +64,12 @@ def resource_not_found(e):
     return jsonify(error=str(e)), 404
 
 
-@app.route('/app/v1/')
-@app.route('/app/v1/<name>')
+@app.route('/')
+@app.route('/<name>')
 def hello(name=None):
     return render_template('hello.html', name=name)
 
 
-@app.route('/app/v1/list')
+@app.route('/list')
 def list(data=None):
     return render_template('places.html', data=DATA)
