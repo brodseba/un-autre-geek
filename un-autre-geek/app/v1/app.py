@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-api_bp = Blueprint('api_v1', __name__)
+api_bp = Blueprint('app_v1', __name__)
 api = Api(api_bp)
 
 DATA = {
