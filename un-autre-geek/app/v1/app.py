@@ -1,9 +1,11 @@
-from flask import Flask, abort, jsonify, render_template
+from flask import Flask, abort, jsonify, render_template, Blueprint
 from flask_restful import Resource, Api, reqparse
 import os
 
 app = Flask(__name__)
-api = Api(app)
+
+api_bp = Blueprint('api_v1', __name__)
+api = Api(api_bp)
 
 DATA = {
     'places':
@@ -71,7 +73,3 @@ def hello(name=None):
 @app.route('/list')
 def list(data=None):
     return render_template('places.html', data=DATA)
-
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
