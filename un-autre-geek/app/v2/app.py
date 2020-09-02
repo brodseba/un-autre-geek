@@ -41,7 +41,7 @@ class Places(Resource):
             # otherwise, add the new location to places
             DATA['places'].append(args['location'])
 
-            db.collection(u'v1').document(db.createId()).set({"name": args['location']})
+            db.collection(u'v1').document().set({"name": args['location']})
             return {'data': DATA}, 200
 
     def delete(self):
@@ -56,7 +56,7 @@ class Places(Resource):
             DATA['places'].remove(args['location'])
             docs = db.collection(u'v1').where('name','==', args['location']).stream()
             for doc in docs:
-                doc.ref.delete();
+                doc.ref.delete()
             return {'data': DATA}, 200
         else:
             # if location does not exist in places list return 404 not found
