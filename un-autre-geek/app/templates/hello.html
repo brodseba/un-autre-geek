@@ -11,4 +11,14 @@
     {% else %}
     <h1>Hello, World!</h1>
     {% endif %}
+
+    {% if data %}
+        <ul class="list-unstyled">
+            {% for place in data.places %}
+                <li>{{ place }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        No place.
+    {% endif %}
 {% endblock %}
