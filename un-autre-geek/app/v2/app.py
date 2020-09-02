@@ -8,6 +8,19 @@ app = Flask(__name__)
 api_bp = Blueprint('app_v2', __name__)
 api = Api(api_bp)
 
+
+# Project ID is determined by the GCLOUD_PROJECT environment variable
+db = firestore.Client()
+
+doc_ref = db.collection(u'v1')
+
+doc = doc_ref.get()
+if doc.exists:
+    print(f'Document data: {doc.to_dict()}')
+else:
+    print(u'No such document!')
+
+
 DATA = {
     'places':
         ['toronto',
