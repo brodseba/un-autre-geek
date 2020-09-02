@@ -14,19 +14,11 @@ db = firestore.Client()
 
 doc_ref = db.collection(u'v1')
 
-doc = doc_ref.get()
-if doc.exists:
-    print(f'Document data: {doc.to_dict()}')
-else:
-    print(u'No such document!')
+docs = doc_ref.stream()
+DATA = {'places' : []}
+for doc in docs:
+    DATA["places"].append(doc.to_dict()["name"])
 
-
-DATA = {
-    'places':
-        ['toronto',
-         'granby',
-         'Sherbrooke']
-}
 
 class Places(Resource):
     def get(self):
@@ -48,6 +40,8 @@ class Places(Resource):
         else:
             # otherwise, add the new location to places
             DATA['places'].append(args['location'])
+
+            db.collection(u'v1').document(db.createId()).set({"name": args['location']})
             return {'data': DATA}, 200
 
     def delete(self):
@@ -60,6 +54,9 @@ class Places(Resource):
         if args['location'] in DATA['places']:
             # if we do, remove and return data with 200 OK
             DATA['places'].remove(args['location'])
+            docs = db.collection(u'v1').where('name','==', args['location']).stream()
+            for doc in docs:
+                doc.ref.delete();
             return {'data': DATA}, 200
         else:
             # if location does not exist in places list return 404 not found
