@@ -56,7 +56,7 @@ class Places(Resource):
             DATA['places'].remove(args['location'])
             docs = db.collection(u'v1').where('name','==', args['location']).stream()
             for doc in docs:
-                doc.ref.delete()
+                doc.reference.delete()
             return {'data': DATA}, 200
         else:
             # if location does not exist in places list return 404 not found

@@ -13,4 +13,16 @@ for doc in docs:
 
 print(DATA)
 
-db.collection(u'v1').document().set({"name": "test"})
+db.collection(u'v1').document().set({"name": "testghfhgf"})
+
+DATA = {'places' : []}
+for doc in docs:
+    DATA["places"].append(doc.to_dict()["name"])
+
+docs = db.collection(u'v1').where('name','==', 'testghfhgf').stream()
+for doc in docs:
+    doc.reference.delete()
+
+DATA = {'places' : []}
+for doc in docs:
+    DATA["places"].append(doc.to_dict()["name"])
