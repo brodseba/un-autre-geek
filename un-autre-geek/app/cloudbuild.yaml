@@ -12,3 +12,8 @@ steps:
 timeout: 1200s
 images:
     - gcr.io/un-autre-geek-dev/app-v2
+
+# Equivalent à : 
+# docker build -t gcr.io/un-autre-geek-dev/app-v2 .
+# docker push gcr.io/un-autre-geek-dev/app-v2
+# gcloud run deploy app-v2 --image=gcr.io/un-autre-geek-dev/app-v2 --region=northamerica-northeast1 --platform=managed --max-instances=1 --cpu=1 --memory=128Mi --allow-unauthenticated
