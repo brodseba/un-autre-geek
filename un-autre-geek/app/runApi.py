@@ -21,7 +21,6 @@ for doc in docs:
 def resource_not_found(e):
     return jsonify(error=str(e)), 404
 
-
 @app.route('/')
 @app.route('/<name>')
 def hello(name=None):
